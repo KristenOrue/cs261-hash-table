@@ -11,15 +11,25 @@ class HashTable:
         self.data = []
         self.keys = []
 
+        for i in range(0,self.size):
+            self.data.append([])
+
+
     def __setitem__(self, key, value):
-         self.data = value
-         self.keys = key
-         #or self.data.append(value)
-            #self.keys.append(key)
+
+         keyvalue = [key,value]
+         index = self.hash(key)
+         self.data[index].append(keyvalue)
 
     def __getitem__(self, key):
         for k in self.keys:
             if k == key:
                 return self.data[k]
         return None
+    
+    def hash(self, key):
+        key = hash(key)
+        key = key % self.size
+        return key  
+
 
